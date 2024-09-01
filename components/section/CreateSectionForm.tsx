@@ -136,7 +136,7 @@ const CreateSectionForm = ({
               Cancel
             </Button>
 
-            <Link href={`/instructor/courses/${course.id}/basic`}>
+
               <Button type="submit" disabled={!isValid || isSubmitting}>
                 {isSubmitting ? (
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -144,7 +144,7 @@ const CreateSectionForm = ({
                   "Save"
                 )}
               </Button>
-            </Link>
+
           </div>
         </form>
       </Form>

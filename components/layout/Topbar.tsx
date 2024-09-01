@@ -5,9 +5,14 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const Topbar = () => {
   const { isSignedIn } = useAuth();
+  const router = useRouter();
+
+  const [searchInput, setSearchInput] = useState("");
   const TopRoutes = [
     {
       label: "Instructor",
@@ -18,6 +23,13 @@ const Topbar = () => {
       path: "/learning",
     },
   ];
+
+  const handleSearch = () => {
+    if (searchInput.trim() !== "") {
+      router.push(`/search?query=${searchInput}`);
+    }
+    setSearchInput("");
+  };
 
   return (
     // Hero Link
@@ -40,10 +52,16 @@ const Topbar = () => {
       <div className="hidden md:w-[300px] lg:w-[400px] md:rounded-full md:flex">
         <input
           type="text"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           className="flex-grow bg-[#dcf7fa] rounded-l-full  border-none outline-none text-sm pl-4 py-3"
           placeholder="Find courses.."
         />
-        <button className="bg-[#02badd] rounded-r-full border-none outline-none cursor-pointer px-4 py-3 hover:bg-[#2196F3]">
+        <button
+          onClick={handleSearch}
+          disabled={searchInput.trim() === ""}
+          className="bg-[#02badd] rounded-r-full border-none outline-none cursor-pointer px-4 py-3 hover:bg-[#2196F3]"
+        >
           <Search />
         </button>
       </div>

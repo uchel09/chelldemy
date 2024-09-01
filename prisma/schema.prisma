@@ -149,6 +149,7 @@ model Purchase {
 
   courseId String
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  status   String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -164,4 +165,12 @@ model StripeCustomer {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
+}
+
+model MidTrans {
+  id         String @id @default(uuid())
+  customerId String
+  status     String
+  orderId    String
+  token      String
 }
